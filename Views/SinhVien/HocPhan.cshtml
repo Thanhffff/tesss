@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NguyenNgocThanh.Models.HocPhan>
+@{
+    ViewBag.Title = "HocPhan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>HocPhan</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaHP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TenHP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoTinChi)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenHP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTinChi)
+            </td>>
+            <td>
+                <button style="color:green; width:80px">Đăng Ký</button>
+            </td>>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "ListSV", "SinhVien")
+</div>

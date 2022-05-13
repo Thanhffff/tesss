@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Test01" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-FVUJ15T\SQLEXPRESS;Initial Catalog=Test01;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Test01ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ChiTietDangKy" Member="ChiTietDangKies">
+    <Type Name="ChiTietDangKy">
+      <Column Name="MaDK" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaHP" Type="System.String" DbType="Char(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="DangKy_ChiTietDangKy" Member="DangKy" ThisKey="MaDK" OtherKey="MaDK" Type="DangKy" IsForeignKey="true" />
+      <Association Name="HocPhan_ChiTietDangKy" Member="HocPhan" ThisKey="MaHP" OtherKey="MaHP" Type="HocPhan" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DangKy" Member="DangKies">
+    <Type Name="DangKy">
+      <Column Name="MaDK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NgayDK" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="MaSV" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="DangKy_ChiTietDangKy" Member="ChiTietDangKies" ThisKey="MaDK" OtherKey="MaDK" Type="ChiTietDangKy" />
+      <Association Name="SinhVien_DangKy" Member="SinhVien" ThisKey="MaSV" OtherKey="MaSV" Type="SinhVien" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HocPhan" Member="HocPhans">
+    <Type Name="HocPhan">
+      <Column Name="MaHP" Type="System.String" DbType="Char(6) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHP" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="SoTinChi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="HocPhan_ChiTietDangKy" Member="ChiTietDangKies" ThisKey="MaHP" OtherKey="MaHP" Type="ChiTietDangKy" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NganhHoc" Member="NganhHocs">
+    <Type Name="NganhHoc">
+      <Column Name="MaNganh" Type="System.String" DbType="Char(4) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNganh" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="NganhHoc_SinhVien" Member="SinhViens" ThisKey="MaNganh" OtherKey="MaNganh" Type="SinhVien" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SinhVien" Member="SinhViens">
+    <Type Name="SinhVien">
+      <Column Name="MaSV" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Hinh" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MaNganh" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Association Name="SinhVien_DangKy" Member="DangKies" ThisKey="MaSV" OtherKey="MaSV" Type="DangKy" />
+      <Association Name="NganhHoc_SinhVien" Member="NganhHoc" ThisKey="MaNganh" OtherKey="MaNganh" Type="NganhHoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
